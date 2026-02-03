@@ -1,117 +1,83 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>치카게무라 탐방 기록</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>치카게무라 탐방 기록</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      background: #0b0b0b;
-      color: #e0e0e0;
-      font-family: "Noto Serif KR", serif;
-      line-height: 1.9;
-    }
-
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    h1 {
-      text-align: center;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-
-    .meta {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-bottom: 40px;
-    }
-
-    .warning {
-      border: 1px solid #444;
-      background: #111;
-      padding: 15px;
-      margin: 30px 0;
-      font-size: 0.9rem;
-    }
-
-    .scene {
-      width: 100%;
-      margin: 40px 0;
-      opacity: 0.85;
-      filter: grayscale(80%) contrast(110%);
-    }
-
-    .log {
-      white-space: pre-line;
-      margin-top: 30px;
-    }
-
-    footer {
-      margin-top: 80px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #666;
-    }
-
-    button {
-      background: #111;
-      color: #ddd;
-      border: 1px solid #444;
-      padding: 10px 15px;
-      cursor: pointer;
-      margin: 20px 0;
-    }
-
-    button:hover {
-      background: #1a1a1a;
-    }
-  </style>
+<style>
+body{
+  margin:0;
+  background:#050505;
+  color:#e5e5e5;
+  font-family:"Noto Serif KR", serif;
+  line-height:1.9;
+}
+.container{
+  max-width:720px;
+  margin:auto;
+  padding:40px 20px;
+}
+.scene{
+  width:100%;
+  margin:40px 0;
+  filter:grayscale(90%) contrast(115%);
+}
+.log{
+  white-space:pre-line;
+}
+button{
+  background:#111;
+  color:#ccc;
+  border:1px solid #444;
+  padding:10px 16px;
+  cursor:pointer;
+}
+</style>
 </head>
 
 <body>
 
-<!-- ===== 오디오 ===== -->
-<audio id="bgm" loop>
-  <source src="audio/main.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="kid">
-  <source src="audio/kid.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="door">
-  <source src="audio/closedoor.mp3" type="audio/mpeg">
-</audio>
+<!-- ===== AUDIO ===== -->
+<audio id="classic" src="sound/ClassicHorror.mp3"></audio>
+<audio id="main" src="sound/main.mp3"></audio>
+<audio id="main2" src="sound/main2.mp3"></audio>
+<audio id="kid" src="sound/kid.mp3"></audio>
+<audio id="opendoor" src="sound/opendoor.mp3"></audio>
+<audio id="closedoor" src="sound/closedoor.mp3"></audio>
+<audio id="bell" src="sound/mbell.mp3"></audio>
+<audio id="crazy" src="sound/crazy.mp3"></audio>
 
 <div class="container">
 
-<h1>치카게무라 탐방 기록</h1>
-<div class="meta">
-탐방 시작 시각: 07:42<br>
-탐방 종료 시각: 07:42<br>
-영상 길이: 12분 06초
+<button onclick="start()">▶ 탐방 기록 재생</button>
+
+<img id="img" class="scene" src="image/1.png">
+
+<div id="text" class="log"></div>
+
 </div>
 
-<button onclick="document.getElementById('bgm').play()">
-▶ 기록 열기
-</button>
+<script>
+const t = document.getElementById("text");
+const img = document.getElementById("img");
 
-<div class="warning">
-※ 이 기록은 사전 후원을 받고 진행된 녹화 영상 및 탐방자의 증언을 바탕으로 작성되었습니다.<br>
-기록의 신뢰성은 보장되지 않습니다.
-</div>
+const classic = document.getElementById("classic");
+const main = document.getElementById("main");
+const main2 = document.getElementById("main2");
+const kid = document.getElementById("kid");
+const opendoor = document.getElementById("opendoor");
+const closedoor = document.getElementById("closedoor");
+const bell = document.getElementById("bell");
+const crazy = document.getElementById("crazy");
 
-<img src="images/aerial.jpg" class="scene" alt="치카게무라 항공 사진">
+kid.volume = 0.05;
 
-<div class="log">
-판테리:
+function start(){
+classic.play();
+
+t.innerText =
+`판테리:
 오늘 판테리가 여러분께 보여드릴 폐가는,
 제 채널에도 한 번 올라왔던
 치카게무라 집단 살인 사건이 발생한 장소입니다.
@@ -120,125 +86,193 @@
 마지막으로 신사까지 탐방해보겠습니다.
 
 2026년 7월 4일 07시 42분.
-탐방을 시작하겠습니다.
+탐방을 시작하겠습니다.`;
 
-여기가 치카게무라 마을 입구입니다.
-</div>
+setTimeout(()=>{
+img.src="image/2.png";
+t.innerText+=`\n\n여기가 치카게무라 마을 입구입니다.`;
+},12000);
 
-<img src="images/house.jpg" class="scene" alt="첫 번째 집"
-     onclick="document.getElementById('door').play()">
-
-<div class="log">
-여기가 첫 번째 집입니다.
+setTimeout(()=>{
+img.src="image/3.png";
+classic.pause();
+main.play();
+t.innerText+=
+`\n\n여기가 첫 번째 집입니다.
 사건 기록상, 가장 먼저 이상 현상이 보고된 장소죠.
 
-실례하겠습니다.
+실례하겠습니다.`;
+opendoor.play();
+},18000);
 
-30년이 넘게 지났지만,
+setTimeout(()=>{
+t.innerText+=
+`\n\n30년이 넘게 지났지만,
 집기와 옷들이 그대로 남아 있습니다.
 
 딱히 특이점이나 이상현상은…
-아직은 없는 것 같네요.
+아직은 없는 것 같네요.`;
+},24000);
 
-다음 집으로 이동하겠습니다.
-</div>
+setTimeout(()=>{
+main.pause();
+kid.play();
+fadeKid();
+t.innerText+=
+`\n\n다음 집으로 이동하겠습니다.
 
-<button onclick="document.getElementById('kid').play()">
-(토랸세… 토랸세…)
-</button>
-
-<div class="log">
 …이게 무슨 소리죠?
 아이들이 노래를 부르는 소리가 들립니다.
 
-멈춰서 주변을 둘러봤습니다.
+멈춰서 주변을 둘러봤습니다.`;
+},32000);
 
-분명히 닫지 않았던 문이,
+setTimeout(()=>{
+closedoor.volume=0.8;
+closedoor.play();
+t.innerText+=
+`\n\n분명히 닫지 않았던 문이,
 등 뒤에서 갑자기 닫혔습니다.
 
 설명할 수는 없었지만,
 이곳에 더 있으면 안 될 것 같은 불길한 느낌이 들었습니다.
 
 나는 옆집으로 도망갔습니다.
-</div>
 
-<img src="images/shrine.jpg" class="scene" alt="치카게무라 신사">
+판테리: 하아… 하아…`;
+},42000);
 
-<div class="log">
-다른 장소들은 모두 생략하겠습니다.
+setTimeout(()=>{
+closedoor.volume=0.3;
+closedoor.play();
+t.innerText+=
+`\n\n문을 닫고 나서야 숨을 고를 수 있었다.
 
-오늘 탐방의 마지막 장소,
-치카게무라 신사입니다.
+이 집은… 아까 그 집보다 더 오래 방치된 것처럼 보였다.
+바닥은 푹 꺼져 있었고,
+벽에는 무언가 긁어낸 듯한 자국들이 군데군데 남아 있었다.
+아이 키 높이였다.
 
-이번 탐방은 한화 약 100만 원 상당의
-후원을 받고 진행 중입니다.
+판테리: 이상하네요…
+여긴 사람이 살았던 흔적이 거의 없어요.`;
+},52000);
 
-여기까지 와서
-그냥 돌아갈 수는 없었습니다.
-</div>
+setTimeout(()=>{
+kid.pause();
+t.innerText+=
+`\n\n그 순간,
+아까 들리던 노랫소리가 뚝 끊겼다.
 
-<div class="log">
-신사 계단을 오르는데,
-내 발소리보다 반 박자 늦는
-다른 소리가 따라왔습니다.
+너무 조용했다.
+귀가 먹먹해질 정도로.
 
-멈추면 멈췄고,
-움직이면 다시 들렸습니다.
+판테리: …노래가 멈췄어요.
+이게 더 이상한데요.`;
+},63000);
 
-아무도 보이지 않았지만,
-확실히 쫓기고 있었습니다.
-</div>
+setTimeout(()=>{
+bell.play();
+t.innerText+=
+`\n\n카메라를 들고 안쪽 방으로 한 발짝 더 들어가려는 순간,
+발밑에서 작은 방울 소리가 났다.
 
-<div class="log">
-여긴 안 됩니다.
+내려다보니,
+깨진 채로 방치된 작은 방울 하나가 굴러가고 있었다.
 
-나는 본당을 등지고
-계단을 뛰듯 내려왔습니다.
+판테리: 이건… 신사에서 쓰는—`;
+},72000);
 
-뒤를 돌아보지 않았습니다.
-</div>
+setTimeout(()=>{
+t.innerText+=
+`\n\n말을 끝내기도 전에,
+집 안 어딘가에서 아이 웃음소리가 났다.
+가깝다.
 
-<div class="log">
-마을을 빠져나올 때까지
-아무 일도 일어나지 않았습니다.
+판테리: 안 되겠다.
+이 집도… 오래 있으면 안 될 것 같아요.`;
+},80000);
 
-차에 올라타고,
-시동을 걸고,
-네비게이션이 정상 작동하는 것을 확인했을 때
-그제야 안도했습니다.
+setTimeout(()=>{
+t.innerText+=
+`\n\n나는 더 이상 안쪽을 확인하지 않았다.
 
-무사히 돌아가겠습니다.
-오늘 탐방은 여기까지입니다.
-</div>
+뒤돌아서 문을 열고 나오자,
+노랫소리가 다시 시작됐다.
 
-<div class="log">
-집에 도착해 촬영 장비를 정리하던 중,
-영상 정보를 확인했습니다.
+토랸세… 토랸세…
+
+하지만 이번엔,
+집 안이 아니라
+마을 전체에서 들려오는 것처럼 느껴졌다.`;
+},88000);
+
+setTimeout(()=>{
+img.src="image/4.png";
+main2.play();
+t.innerText+=
+`\n\n판테리:
+오늘 탐방의 마지막 장소입니다.
+치카게무라 신사.`;
+},98000);
+
+setTimeout(()=>{
+t.innerText+=
+`\n\n사실 여기까지 오지 않으려고 했다.
+하지만 돌아갈 수는 없었다.
+
+판테리:
+이번 탐방…
+백만 원 정도 후원을 받고 진행하고 있습니다.`;
+},108000);
+
+setTimeout(()=>{
+main2.pause();
+crazy.play();
+t.innerText+=
+`\n\n계단 위,
+아무도 없었다.
+
+하지만
+먼지가 막 스쳐 지나간 것처럼 흩어져 있었다.
+
+확신이 들었다.
+쫓기고 있다.`;
+},120000);
+
+setTimeout(()=>{
+crazy.pause();
+main.play();
+t.innerText+=
+`\n\n판테리: 죄송합니다.
+오늘은… 여기까지 하겠습니다.
 
 탐방 시작 시각: 07:42
 탐방 종료 시각: 07:42
 
-영상 길이: 12분 06초
+영상 길이: 12분 06초.`;
+},135000);
 
-시작도 끝도 같은 시각인데,
-영상은 분명 존재했습니다.
-</div>
-
-<div class="log">
-그날 밤,
-귀 안쪽에서 아주 작은 소리가 들렸습니다.
+setTimeout(()=>{
+main.pause();
+t.innerText+=
+`\n\n그날 밤,
+귀 안쪽에서 아주 작게 소리가 났다.
 
 토랸세… 토랸세…
 
-눈을 뜨지 않았습니다.
-그게 가장 안전한 선택이라는 걸
-이상하게도 알고 있었으니까요.
-</div>
+나는 눈을 뜨지 않았다.`;
+},150000);
+}
 
-<footer>
-이 기록을 읽는 동안 뒤로 가기 버튼을 누르지 마십시오.
-</footer>
+function fadeKid(){
+let v=0.05;
+const f=setInterval(()=>{
+ if(v>=0.6){clearInterval(f);}
+ kid.volume=v;
+ v+=0.02;
+},400);
+}
+</script>
 
-</div>
 </body>
 </html>
