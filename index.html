@@ -52,7 +52,6 @@ button{
 
 <button onclick="start()">▶ 탐방 기록 재생</button>
 
-<!-- ✅ 이미지 경로 수정 -->
 <img id="img" class="scene" src="images/1.png">
 
 <div id="text" class="log"></div>
@@ -60,8 +59,8 @@ button{
 </div>
 
 <script>
-/* ===== 속도 ===== */
-const SPEED = 0.6;
+/* ===== 🔧 전체 속도 (정상 속도) ===== */
+const SPEED = 1.0;   // ← 여기만 바뀜
 
 const t = document.getElementById("text");
 const img = document.getElementById("img");
@@ -269,12 +268,12 @@ setTimeout(()=>{
 }
 
 function fadeKid(){
-  let v=0.05;
+  let v=0.03;
   const f=setInterval(()=>{
     if(v>=0.6){clearInterval(f);}
     kid.volume=v;
-    v+=0.04;
-  },300);
+    v+=0.02;
+  },400);
 }
 </script>
 
